@@ -1,6 +1,7 @@
 import boto3
 import botocore
 import click
+import sys
 
 # session = boto3.Session(profile_name='shotty')
 # ec2 = session.resource('ec2')
@@ -31,6 +32,9 @@ def cli(profile):
     session_cfg = {}
     if profile:
         session_cfg['profile_name'] = profile
+    else:
+        print("Error: profile is missing")
+        sys.exit(1)
 
     session = boto3.Session(**session_cfg)
     ec2 = session.resource('ec2')
